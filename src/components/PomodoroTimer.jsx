@@ -46,12 +46,45 @@ export default function PomodoroTimer({ onSessionComplete }) {
     setTimeLeft(clamped * 60);
   }
 
+  // handle preset click
+  const handlePresetClick = (minutes) => {
+    if (isRunning) return;
+    setSessionMinutes(minutes);
+    setTimeLeft(minutes * 60);
+  }
+
   return (
-    <div className="flex flex-col items-center space-y-4 border p-4 rounded-md">
+    <div className="w-full max-w-lg flex flex-col items-center space-y-4 border p-6 rounded-md">
       <h2 className="text-xl font-bold">Pomodoro Timer</h2>
 
+      {/* Presets */}
+      <div className="flex flex-nowrap gap-2 justify-center">
+        <button
+          onClick={() => handlePresetClick(25)}
+          disabled={isRunning}
+          className="bg-green-500 text-white px-2 py-1 rounded disabled:opacity-50"
+        >
+          Focus 25
+        </button>
+        <button
+          onClick={() => handlePresetClick(50)}
+          disabled={isRunning}
+          className="bg-blue-500 text-white px-2 py-1 rounded disabled:opacity-50"
+        >
+          Deep Work 50
+        </button>
+        <button
+          onClick={() => handlePresetClick(15)}
+          disabled={isRunning}
+          className="bg-orange-500 text-white px-2 py-1 rounded disabled:opacity-50"
+        >
+          Quick Sprint 15
+        </button>
+      </div>
+
+      {/* Manual input */}
       <div className="flex items-center space-x-2">
-        <label htmlFor="sessionLength">Session (min):</label>
+        <label htmlFor="sessionLength">Custom (min):</label>
         <input
           id="sessionLength"
           type="number"
@@ -76,7 +109,7 @@ export default function PomodoroTimer({ onSessionComplete }) {
         <button
           onClick={() => setIsRunning(true)}
           disabled={isRunning}
-          className="bg-green-500 text-white px-3 py-1 rounded disabled:opacity-50"
+          className="bg-green-600 text-white px-3 py-1 rounded disabled:opacity-50"
         >
           Start
         </button>
