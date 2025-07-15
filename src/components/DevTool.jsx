@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAllUserIds, getSessions, clearSessions } from './storage';
+import { getAllUserIds, getSessions, clearSessions } from '../storage';
 
 export default function DevTool() {
   const [userIds, setUserIds] = useState([]);
