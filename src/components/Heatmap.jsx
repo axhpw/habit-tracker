@@ -7,6 +7,8 @@ export default function Heatmap() {
   const calRef = useRef(null);
 
   useEffect(() => {
+    if (!calRef.current) return;
+
     const cal = new CalHeatmap();
 
     // Convert sessions to { timestamp: count }
@@ -20,18 +22,23 @@ export default function Heatmap() {
 
     cal.paint({
       itemSelector: calRef.current,
-      domain: 'month',
-      subDomain: 'day',
-      range: 12, // 12 months back
+      domain: {
+        type: 'month',
+        label: { position: 'top' }, // or remove this if you want no labels
+      },
+      subDomain: {
+        type: 'day',
+      },
+      range: 12,
+      start: new Date(new Date().setDate(new Date().getDate() - 365)),
       data: {
         source: data,
         type: 'json',
       },
-      start: new Date(new Date().setDate(new Date().getDate() - 365)),
       domainGutter: 2,
       legend: [1, 2, 4, 6],
+      tooltip: true,
     });
-
     return () => cal.destroy();
   }, []);
 
