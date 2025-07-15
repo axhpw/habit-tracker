@@ -3,6 +3,7 @@ import './App.css'
 
 // import components
 import PomodoroTimer from './components/PomodoroTimer';
+import DevTool from './components/DevTool';
 
 // import helpers
 import { saveSession, getSessions } from './storage';
@@ -31,6 +32,7 @@ function App() {
       <p className="text-lg">
         🎉 Today's Sessions: {sessions}
       </p>
+      <DevTool/>
     </div>
   );
 
