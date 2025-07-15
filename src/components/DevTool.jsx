@@ -70,7 +70,10 @@ export default function DevTool() {
         </tbody>
       </table>
 
-      <button onClick={handleClear} style={{ marginTop: '1rem' }}>
+      <button 
+        onClick={handleClear} 
+        style={{ marginTop: '1rem' }}
+        className="bg-[#21262d] border border-[#30363d] text-[#c9d1d9] px-4 py-2 rounded hover:bg-[#30363d]">
         Clear Sessions for {selectedUser}
       </button>
     </div>

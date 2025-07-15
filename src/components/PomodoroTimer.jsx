@@ -62,21 +62,21 @@ export default function PomodoroTimer({ onSessionComplete }) {
         <button
           onClick={() => handlePresetClick(25)}
           disabled={isRunning}
-          className="bg-green-500 text-white px-2 py-1 rounded disabled:opacity-50"
+          className="bg-[#21262d] border border-[#30363d] text-[#c9d1d9] px-4 py-2 rounded hover:bg-[#30363d]"
         >
           Focus 25
         </button>
         <button
           onClick={() => handlePresetClick(50)}
           disabled={isRunning}
-          className="bg-blue-500 text-white px-2 py-1 rounded disabled:opacity-50"
+          className="bg-[#21262d] border border-[#30363d] text-[#c9d1d9] px-4 py-2 rounded hover:bg-[#30363d]"
         >
           Deep Work 50
         </button>
         <button
           onClick={() => handlePresetClick(15)}
           disabled={isRunning}
-          className="bg-orange-500 text-white px-2 py-1 rounded disabled:opacity-50"
+          className="bg-[#21262d] border border-[#30363d] text-[#c9d1d9] px-4 py-2 rounded hover:bg-[#30363d]"
         >
           Quick Sprint 15
         </button>
@@ -97,7 +97,7 @@ export default function PomodoroTimer({ onSessionComplete }) {
         <button
           onClick={adjustSession}
           disabled={isRunning}
-          className="bg-blue-500 text-white px-2 py-1 rounded disabled:opacity-50"
+          className="bg-[#21262d] border border-[#30363d] text-[#c9d1d9] px-4 py-2 rounded hover:bg-[#30363d]"
         >
           Set
         </button>
@@ -109,14 +109,14 @@ export default function PomodoroTimer({ onSessionComplete }) {
         <button
           onClick={() => setIsRunning(true)}
           disabled={isRunning}
-          className="bg-green-600 text-white px-3 py-1 rounded disabled:opacity-50"
+          className="bg-[#21262d] border border-[#30363d] text-[#c9d1d9] px-4 py-2 rounded hover:bg-[#30363d]"
         >
           Start
         </button>
         <button
           onClick={() => setIsRunning(false)}
           disabled={!isRunning}
-          className="bg-yellow-500 text-white px-3 py-1 rounded disabled:opacity-50"
+          className="bg-[#21262d] border border-[#30363d] text-[#c9d1d9] px-4 py-2 rounded hover:bg-[#30363d]"
         >
           Pause
         </button>
@@ -125,7 +125,7 @@ export default function PomodoroTimer({ onSessionComplete }) {
             setIsRunning(false);
             setTimeLeft(sessionMinutes * 60);
           }}
-          className="bg-red-500 text-white px-3 py-1 rounded"
+          className="bg-[#21262d] border border-[#30363d] text-[#c9d1d9] px-4 py-2 rounded hover:bg-[#30363d]"
         >
           Reset
         </button>

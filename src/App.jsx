@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import './App.css'
 
 // import components
 import PomodoroTimer from './components/PomodoroTimer';
@@ -8,6 +7,10 @@ import Heatmap from './components/Heatmap';
 
 // import helpers
 import { saveSession, getSessions } from './helpers/storage';
+
+// make sure my app styles come after any default styles
+import 'react-calendar-heatmap/dist/styles.css';
+import './App.css'
 
 function App() {
   const [sessions, setSessions] = useState(0);
@@ -29,12 +32,11 @@ function App() {
   return (
     <div>
       <div className="max-w-md mx-auto p-6 space-y-6">
-        <h1 className="text-2xl font-bold">Pomodoro Tracker</h1>
+        <h1 className="text-2xl font-bold">Streakeasy</h1>
         <PomodoroTimer onSessionComplete={handleSessionComplete} />
         <p className="text-lg">
           🎉 Today's Sessions: {sessions}
         </p>
-        <DevTool/>
       </div>
       <div className="w-full flex justify-center mt-12">
         <Heatmap/>
