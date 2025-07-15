@@ -4,9 +4,10 @@ import './App.css'
 // import components
 import PomodoroTimer from './components/PomodoroTimer';
 import DevTool from './components/DevTool';
+import Heatmap from './components/Heatmap';
 
 // import helpers
-import { saveSession, getSessions } from './storage';
+import { saveSession, getSessions } from './helpers/storage';
 
 function App() {
   const [sessions, setSessions] = useState(0);
@@ -33,6 +34,7 @@ function App() {
         🎉 Today's Sessions: {sessions}
       </p>
       <DevTool/>
+      <Heatmap/>
     </div>
   );
 
