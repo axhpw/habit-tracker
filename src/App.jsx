@@ -27,14 +27,18 @@ function App() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Pomodoro Tracker</h1>
-      <PomodoroTimer onSessionComplete={handleSessionComplete} />
-      <p className="text-lg">
-        🎉 Today's Sessions: {sessions}
-      </p>
-      <DevTool/>
-      <Heatmap/>
+    <div>
+      <div className="max-w-md mx-auto p-6 space-y-6">
+        <h1 className="text-2xl font-bold">Pomodoro Tracker</h1>
+        <PomodoroTimer onSessionComplete={handleSessionComplete} />
+        <p className="text-lg">
+          🎉 Today's Sessions: {sessions}
+        </p>
+        <DevTool/>
+      </div>
+      <div className="w-full flex justify-center mt-12">
+        <Heatmap/>
+      </div>
     </div>
   );
 
