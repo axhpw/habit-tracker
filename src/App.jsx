@@ -1,13 +1,27 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
+// import components
 import PomodoroTimer from './components/PomodoroTimer';
+
+// import helpers
+import { saveSession, getSessions } from './storage';
 
 function App() {
   const [sessions, setSessions] = useState(0);
 
+  useEffect(() => {
+    const today = new Date().toISOString().split('T')[0];
+    const sessions = getSessions();
+    setSessions(sessions[today] || 0);
+  }, []);
+
   const handleSessionComplete = () => {
-    setSessions((prev) => prev + 1);
+    // setSessions((prev) => prev + 1);
+    saveSession();
+    const today = new Date().toISOString().split('T')[0];
+    const sessions = getSessions();
+    setSessions(sessions[today]);
   };
 
   return (
@@ -15,7 +29,7 @@ function App() {
       <h1 className="text-2xl font-bold">Pomodoro Tracker</h1>
       <PomodoroTimer onSessionComplete={handleSessionComplete} />
       <p className="text-lg">
-        🎉 Sessions completed this run: {sessions}
+        🎉 Today's Sessions: {sessions}
       </p>
     </div>
   );
