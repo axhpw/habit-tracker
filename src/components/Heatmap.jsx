@@ -1,46 +1,54 @@
-import React, { useEffect, useRef } from 'react';
-import CalHeatmap from 'cal-heatmap';
-import 'cal-heatmap/cal-heatmap.css'; // If you want default styles
+import React from 'react';
+import CalendarHeatmap from 'react-calendar-heatmap';
+import { Tooltip } from 'react-tooltip';
+import 'react-calendar-heatmap/dist/styles.css';
+import 'react-tooltip/dist/react-tooltip.css';
 import { getSessions } from '../helpers/storage';
 
 export default function Heatmap() {
-  const calRef = useRef(null);
+  const sessions = getSessions();
+  const values = Object.entries(sessions).map(([date, count]) => ({
+    date,
+    count,
+  }));
 
-  useEffect(() => {
-    if (!calRef.current) return;
+  const today = new Date();
+  const lastYear = new Date();
+  lastYear.setDate(today.getDate() - 365);
 
-    const cal = new CalHeatmap();
-
-    // Convert sessions to { timestamp: count }
-    const sessions = getSessions(); // default user
-    const data = {};
-    for (const [date, count] of Object.entries(sessions)) {
-      // Convert 'YYYY-MM-DD' to Unix timestamp in SECONDS
-      const timestamp = Math.floor(new Date(date).getTime() / 1000);
-      data[timestamp] = count;
-    }
-
-    cal.paint({
-      itemSelector: calRef.current,
-      domain: {
-        type: 'month',
-        label: { position: 'top' }, // or remove this if you want no labels
-      },
-      subDomain: {
-        type: 'day',
-      },
-      range: 12,
-      start: new Date(new Date().setDate(new Date().getDate() - 365)),
-      data: {
-        source: data,
-        type: 'json',
-      },
-      domainGutter: 2,
-      legend: [1, 2, 4, 6],
-      tooltip: true,
-    });
-    return () => cal.destroy();
-  }, []);
-
-  return <div ref={calRef} />;
+  return (
+    <div
+      style={{
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        marginTop: '2rem',
+      }}
+    >
+      <div style={{ width: '100%', maxWidth: '1000px' }}>
+        <CalendarHeatmap
+          startDate={lastYear}
+          endDate={today}
+          values={values}
+          showWeekdayLabels={true}
+          gutterSize={3}
+          classForValue={(value) => {
+            if (!value || value.count === 0) return 'color-empty';
+            if (value.count >= 6) return 'color-github-4';
+            if (value.count >= 4) return 'color-github-3';
+            if (value.count >= 2) return 'color-github-2';
+            return 'color-github-1';
+          }}
+          tooltipDataAttrs={(value) => {
+            if (!value || !value.date) return null;
+            return {
+              'data-tooltip-id': 'heatmap-tooltip',
+              'data-tooltip-content': `${value.date}: ${value.count} sessions`,
+            };
+          }}
+        />
+        <Tooltip id="heatmap-tooltip" />
+      </div>
+    </div>
+  );
 }

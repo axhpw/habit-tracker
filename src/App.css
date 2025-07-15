@@ -42,3 +42,20 @@
 .read-the-docs {
   color: #888;
 }
+
+/* GitHub contribution color scale */
+.color-empty {
+  fill: #ebedf0;
+}
+.color-github-1 {
+  fill: #9be9a8;
+}
+.color-github-2 {
+  fill: #40c463;
+}
+.color-github-3 {
+  fill: #30a14e;
+}
+.color-github-4 {
+  fill: #216e39;
+}
